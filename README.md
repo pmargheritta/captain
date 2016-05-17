@@ -46,7 +46,7 @@ En mode silencieux, Captain n'intervient plus spontanément. Il est en revanche 
 
 ## Insulte privée
 
-La fonctionnalité d'insulte privée, à utiliser avec prudence, envoie une insulte aléatoire par message privé à un utilisateur donné. L'insulte envoyée est consignée dans le journal `log`, ainsi que les réactions éventuelles des utilisateurs visés.
+La fonctionnalité d'insulte privée, à utiliser avec prudence, envoie une insulte aléatoire par message privé à un utilisateur donné. L'insulte envoyée est recopiée en message privé pour l'envoyeur. Elle est également consignée dans le journal `log`, de même que les réactions éventuelles des utilisateurs visés.
 
 ## Dictée
 
