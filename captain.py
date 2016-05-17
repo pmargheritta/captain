@@ -228,9 +228,9 @@ class Captain(irc.bot.SingleServerIRCBot):
             return
         
         # Arrêt du jeu, kick et arrêt du bot
-        match_stop = re.search(self.params['pseudo'] + '[:, ]+stop.*', message, re.IGNORECASE)
-        match_sors = re.search(self.params['pseudo'] + '[:, ]+sors.*', message, re.IGNORECASE)
-        match_meurs = re.search(self.params['pseudo'] + '[:, ]+meurs.*', message, re.IGNORECASE)
+        match_stop = re.search(self.params['pseudo'] + '[:,\s]+stop', message, re.IGNORECASE)
+        match_sors = re.search(self.params['pseudo'] + '[:,\s]+sors', message, re.IGNORECASE)
+        match_meurs = re.search(self.params['pseudo'] + '[:,\s]+meurs', message, re.IGNORECASE)
         if match_stop:
             self.log('req_stop', source)
             if self.jeu_en_cours:
@@ -252,7 +252,7 @@ class Captain(irc.bot.SingleServerIRCBot):
             return
         
         # Rechargement des paramètres
-        match_charge = re.search(self.params['pseudo'] + '[:, ]+charge.*', message, re.IGNORECASE)
+        match_charge = re.search(self.params['pseudo'] + '[:,\s]+charge', message, re.IGNORECASE)
         if match_charge:
             self.log('req_charge', source)
             self.params = json.load(open('params.json'))
@@ -261,8 +261,8 @@ class Captain(irc.bot.SingleServerIRCBot):
             return
         
         # Mode silence
-        match_silence = re.search(self.params['pseudo'] + '[:, ]+silence.*', message, re.IGNORECASE)
-        match_parle = re.search(self.params['pseudo'] + '[:, ]+parle.*', message, re.IGNORECASE)
+        match_silence = re.search(self.params['pseudo'] + '[:,\s]+silence', message, re.IGNORECASE)
+        match_parle = re.search(self.params['pseudo'] + '[:,\s]+parle', message, re.IGNORECASE)
         if match_silence:
             self.log('req_silence', source)
             if self.silence:
@@ -283,8 +283,8 @@ class Captain(irc.bot.SingleServerIRCBot):
             return
         
         # Dictée
-        match_dictee = re.search(self.params['pseudo'] + '[:, ]+dictée +([0-9]*).*', message, re.IGNORECASE)
-        match_rappel = re.search(self.params['pseudo'] + '[:, ]+rappel.*', message, re.IGNORECASE)
+        match_dictee = re.search(self.params['pseudo'] + '[:,\s]+dictée(?:\s+([0-9]+))?', message, re.IGNORECASE)
+        match_rappel = re.search(self.params['pseudo'] + '[:,\s]+rappel', message, re.IGNORECASE)
         if match_dictee and not self.jeu_en_cours:
             self.log('req_dictee', source)
             self.mots = self.mots_dictee(match_dictee)
@@ -303,11 +303,11 @@ class Captain(irc.bot.SingleServerIRCBot):
             return
         
         # Envoie une insulte par MP ou une insulte personnelle lors de l’évocation de son nom
-        match_insulte = re.search(self.params['pseudo'] + '[:, ]+insulte +([^ ]+).*', message, re.IGNORECASE)
+        match_insulte = re.search(self.params['pseudo'] + '[:,\s]+insulte(?:\s+(\w+))?', message, re.IGNORECASE)
         if match_insulte:
             cible = match_insulte.groups()[0]
             self.log('req_insulte', cible, source)
-            if self.pseudo_bot(cible) or cible.lower() == self.params['proprietaire'].lower():
+            if not cible or self.pseudo_bot(cible) or cible.lower() == self.params['proprietaire'].lower():
                 self.baffe(serv, source)
             else:
                 # Insulter et recopier l’insulte en MP
