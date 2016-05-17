@@ -255,7 +255,7 @@ class Captain(irc.bot.SingleServerIRCBot):
         match_charge = re.search(self.params['pseudo'] + '[:, ]+charge.*', message, re.IGNORECASE)
         if match_charge:
             self.log('req_charge', source)
-            self.params = params()
+            self.params = json.load(open('params.json'))
             serv.action(self.canal, self.params['charge'])
             self.log('charge')
             return
