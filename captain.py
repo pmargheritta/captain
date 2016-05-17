@@ -196,8 +196,8 @@ class Captain(irc.bot.SingleServerIRCBot):
         message = ev.arguments[0]
         
         # Écrit la requête dans le canal
-        match_msg = re.search('!msg +(.*)', message, re.IGNORECASE)
-        match_act = re.search('!act +(.*)', message, re.IGNORECASE)
+        match_msg = re.search('!msg\s+(.*)', message, re.IGNORECASE)
+        match_act = re.search('!act\s+(.*)', message, re.IGNORECASE)
         if match_msg:
             requete = match_msg.groups()[0]
             self.log('req_msg', source, requete)
