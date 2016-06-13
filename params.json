@@ -1,11 +1,11 @@
 {
     "serveur": "irc.oftc.net",
     "port": 6667,
-    "canal": "##captain",
+    "canal": "#dorsal-fun",
     "mdp": "",
-    "pseudo": "Captain",
-    "prefixe_silence": "Silence",
-    "nom": "Captain",
+    "pseudo": "CaptainAdHoc",
+    "prefixe_silence": "S",
+    "nom": "CaptainAdHoc",
     "proprietaire": "pmargheritta",
     
     "messages_perso": "messages_perso",
@@ -53,6 +53,7 @@
     
     "log_ptichaton": "Arrêt du mode perroquet de ptichaton",
     "log_join": "Entrée sur {}",
+    "log_action": "Action de {} : {}",
     "log_invite": "Invitation sur {} par {}",
     "log_kick": "Kick de {} par {} : {}",
     "log_privmsg": "<{}> {}",
