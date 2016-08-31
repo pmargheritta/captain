@@ -143,7 +143,7 @@ class Captain(irc.bot.SingleServerIRCBot):
     def on_action(self, serv, ev):
         '''Réagit aux actions'''
         
-        self.log('action', nm2m(ev.source), ev.arguments[0])
+        self.log('action', nm2n(ev.source), ev.arguments[0])
         self.repondre_smiley(serv, ev)
         
         if nm2n(ev.source) == 'ptichaton' and ev.arguments[0] == 'est un perroquet bavard':
